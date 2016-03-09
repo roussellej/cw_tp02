@@ -84,4 +84,33 @@ class Controleur extends Observateur
 	{
 		this._vue.retirerAlerte();
 	}
+	
+	commanderMatieresPremieres(){
+		this._entreprise.commanderMatieresPremieres();
+		this.notifier();
+	}
+	
+	recruter(){
+		this._entreprise.recruter();
+		this.notifier();
+	}
+	
+	licencier(){
+		this._entreprise.licencier();
+		this.notifier();
+	}
+	
+	produireVelo(){
+		this._entreprise.produireVelo();
+		this.notifier();
+	}
+	
+	produireVoiture(){
+		this._entreprise.produireVoiture();
+		this.notifier();
+	}
+	produireScooter(){
+		this._entreprise.produire();
+		this.notifier();
+	}
 }

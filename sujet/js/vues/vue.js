@@ -10,7 +10,27 @@ class Vue
 	constructor()
 	{
 		//A faire
-	}
+		document.addEventListener("click",function(event){controleur.gererClick(event);},false);
+		controleur.ajouterEvenementClick("btn-commander-matieres-premieres",function(){
+			controleur.commanderMatieresPremieres();}
+			);
+		controleur.ajouterEvenementClick("btn-produire-velo",function(){
+			controleur.produireVelo();}
+			);
+		controleur.ajouterEvenementClick("btn-produire-scooter",function(){
+			controleur.produireScooter();}
+			);
+		controleur.ajouterEvenementClick("btn-produire-voiture",function(){
+			controleur.produireVoiture();}
+			);
+		controleur.ajouterEvenementClick("btn-recruter",function(){
+			controleur.recruter();}
+			);
+		controleur.ajouterEvenementClick("btn-licencier",function(){
+			controleur.licencier();}
+			);
+	}	
+		
 
 	/**
 	 * Actualise l'affichage de la page
@@ -39,6 +59,14 @@ class Vue
 	actualiserRessources(entreprise)
 	{
 		//A faire
+		var stock = document.getElementById("stock");
+		var matiere = document.getElementById("matieres-premieres");
+		var ressources= document.getElementById("ressources-humaines");
+		var tresorerie = document.getElementById("tresorerie");
+		stock.innerHTML = "Stock "+entreprise.getEspaceStockageOccupe()+"/"+entreprise.getEspaceStockageTotal();
+		matiere.innerHTML = "Matières "+entreprise.getMatieresPremieres();
+		ressources.innerHTML = "Ressources humaines "+entreprise.getRessourcesHumainesOccupees()+"/"+entreprise.getRessourcesHumainesTotal();
+		tresorerie.innerHTML = "Tresorerie "+entreprise.getTresorerie();
 	}
 
 	/**
@@ -48,6 +76,15 @@ class Vue
 	actualiserProduction(entreprise)
 	{
 		//A faire
+		var velo = new Velo();
+		var prodvelo = document.getElementById("info-production-velo");
+		var prodscooter = document.getElementById("info-production-scooter");
+		var prodvoiture = document.getElementById("info-production-voiture");
+		prodvelo.innerHTML = entreprise.getQuantiteProduction(velo);
+		console.log(entreprise.getQuantiteProduction(velo));
+		prodscooter.innerHTML = entreprise.getQuantiteProduction(entreprise.typeProduit);
+		prodvoiture.innerHTML = entreprise.getQuantiteProduction(entreprise.typeProduit);
+		
 	}
 
 	/**
@@ -57,6 +94,13 @@ class Vue
 	actualiserStock(entreprise)
 	{
 		//A faire
+		var stockvelo = document.getElementById("info-stock-velo");
+		var stockscooter = document.getElementById("info-stock-scooter");
+		var stockvoiture = document.getElementById("info-stock-voiture");
+		stockvelo.innerHTML = entreprise.getQuantiteStock(entreprise.typeProduit);
+		stockscooter.innerHTML = entreprise.getQuantiteStock(entreprise.typeProduit);
+		stockvoiture.innerHTML = entreprise.getQuantiteStock(entreprise.typeProduit);
+		
 	}
 
 	/**
@@ -66,6 +110,12 @@ class Vue
 	actualiserDemandes(consommateurs)
 	{
 		//A faire
+		var prodvelo = document.getElementById("info-demandes-velo");
+		var prodscooter = document.getElementById("info-demandes-scooter");
+		var prodvoiture = document.getElementById("info-demandes-voiture");
+		prodvelo.innerHTML = consommateurs.getDemandeVelo();
+		prodscooter.innerHTML = consommateurs.getDemandeScooter();
+		prodvoiture.innerHTML = consommateurs.getDemandeVoiture();
 	}
 
 	//#region Gestion des alertes

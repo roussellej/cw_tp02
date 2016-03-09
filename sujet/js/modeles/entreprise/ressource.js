@@ -14,6 +14,8 @@ class Ressource
 	{
 		this._nom = nom;
 		this._quantite = quantite;
+		
+		this._count=0;
 	}
 
 	/**
@@ -28,6 +30,8 @@ class Ressource
 	 */
 	ajouter(quantite)
 	{
+		console.log("je suis passer par ajouter" + this._count);
+		this._count+=1;
 		this._quantite += quantite;
 	}
 
@@ -38,9 +42,11 @@ class Ressource
 	 */
 	retirer(quantite)
 	{
-		if (this._quantite < quantite)
+		if (this._quantite < quantite){
 			throw "Ressource::retirer - Pas assez de " + this.getNom() + " disponible.";
-
+		}
+		else{
 		this._quantite -= quantite;
+		}
 	}
 }

@@ -10,6 +10,8 @@ class Produits
 	constructor()
 	{
 		this._produits = {};
+		this._count=0;
+		this._count2=0;
 	}
 
 	/**
@@ -19,6 +21,8 @@ class Produits
 	 */
 	ajouter(produit, quantite)
 	{
+		console.log("produits  suis passer par ajouter" + this._count);
+		this._count+=1;
 		//Si le type de produit est déjà connu de la collection, on modifie la quantité de produit, sinon on crée un nouveau ProduitQuantifiable
 		if (this._produits[produit.getType()])
 			this._produits[produit.getType()].ajouter(quantite);
@@ -48,11 +52,21 @@ class Produits
 	 */
 	getQuantiteTypeProduit(typeProduit)
 	{
+		console.log("produits est passé par getQuantitéTypeProduit"+this._count2);
+		this._count2+=1;
 		var quantite = 0;
-
-		if (this._produits[typeProduit])
+		//console.log(typeProduit);
+		//console.log("get produits 1");
+		//console.log(this._produits);
+		if(this._produits[typeProduit]){
+			//console.log("je passe");
 			quantite = this._produits[typeProduit].getQuantite();
-
+		}
+		else{
+			//console.log("je passe pas");
+		}
+		//console.log("get produits 2");
+		//console.log(this._produits);
 		return quantite;
 	}
 

@@ -11,15 +11,18 @@ class Entreprise extends Sujet
 	 */
 	constructor(controleur)
 	{
+		
 		super();
 		this.ajouterObservateur(controleur);
 
 		this._stock = new Stock(100);
-		this._matieresPremieres = new Ressource('Matieres Premieres', 0);
-		this._ressourcesHumaines = new Ressource('Ressources humaines', 0);
+		this._matieresPremieres = new Ressource('Matieres Premieres',200);
+		this._ressourcesHumaines = new Ressource('Ressources humaines', 200);
 		this._tresorerie = new Ressource('Trésorerie', 300000);
 
 		this._productionEnCours = new Produits();
+		
+		this._count = 0;
 	}
 
 	/**
@@ -91,7 +94,10 @@ class Entreprise extends Sujet
 	 */
 	commanderMatieresPremieres()
 	{
-		//A faire
+		//A faire		
+		this._matieresPremieres.ajouter(100);
+		this._tresorerie.retirer(400*100);
+	
 	}
 
 	/**
@@ -100,6 +106,7 @@ class Entreprise extends Sujet
 	recruter()
 	{
 		//A faire
+		this._ressourcesHumaines.ajouter(1);
 	}
 
 	/**
@@ -108,6 +115,8 @@ class Entreprise extends Sujet
 	licencier()
 	{
 		//A faire	
+			this._ressourcesHumaines.retirer(1);
+			this._tresorerie.retirer(10000);		
 	}
 
 	/**
@@ -134,6 +143,9 @@ class Entreprise extends Sujet
 	produireVelo()
 	{
 		//A faire
+		var velo = new Velo();
+		this.produire(velo);
+
 	}
 
 	/**
@@ -142,6 +154,8 @@ class Entreprise extends Sujet
 	produireScooter()
 	{
 		//A faire
+		var scooter = new Scooter();
+		this.produire(scooter);
 	}
 
 	/**
@@ -150,6 +164,8 @@ class Entreprise extends Sujet
 	produireVoiture()
 	{
 		//A faire
+		var voiture = new Voiture();
+		this.produire(voiture);
 	}
 
 	/**
@@ -175,8 +191,26 @@ class Entreprise extends Sujet
 	 * @param produit {Produit} Produit à produire
 	 */
 	demarrerProduction(produit)
-	{
+	{	var xx = this._productionEnCours.getQuantiteTypeProduit(Velo);
+		console.log("entreprise in à demarererProduction "+this._count+" stock="+xx);
+	
+		
+		
 		//A faire
+		//console.log("demarage 1 ");
+		//console.log(this._productionEnCours);
+		this._productionEnCours.ajouter(produit,1);
+		//console.log("demarage 2");
+		//console.log(this._productionEnCours);
+		//console.log(this);
+		//console.log(this._productionEnCours);
+		this._matieresPremieres.retirer(produit.getCoutMatieresPremieres());
+		this._ressourcesHumaines.retirer(produit.getCoutRessourcesHumaines());		
+		//console.log(this.getQuantiteProduction(produit));
+		//console.log(this._productionEnCours._produits);
+		//console.log(this);
+		console.log("entreprise out à demarererProduction "+this._count);
+		this._count+=1;
 	}
 
 	/**
@@ -186,6 +220,7 @@ class Entreprise extends Sujet
 	acheverProduction(produit)
 	{
 		//A faire
+		this._productionEnCours.retirer(produit,1);
 	}
 
 	/**
